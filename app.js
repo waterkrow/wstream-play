@@ -48,14 +48,14 @@ function connect(){
   clearTimeout(retry);clearTimeout(connectWatchdog);clearTimeout(configTimer);
   config=null;closeDecoder();syncCarGps(false);
   if(ws&&ws.readyState<2){try{ws.close()}catch(e){}}
-  show(hadSession?"휴대폰에 다시 연결 중…\\n자동으로 다시 시도합니다":"휴대폰 연결 중…\\n연결 경로가 준비될 때까지 자동 재시도합니다");
+  show(hadSession?"휴대폰에 다시 연결 중…\n자동으로 다시 시도합니다":"휴대폰 연결 중…\n연결 경로가 준비될 때까지 자동 재시도합니다");
   const socket=new WebSocket(`wss://${STREAM_HOST}/ws`);socket.binaryType="arraybuffer";ws=socket;
   const retrySoon=()=>{
     if(generation!==connectGeneration)return;
     clearTimeout(connectWatchdog);clearTimeout(configTimer);
     if(ws===socket)ws=null;
     try{socket.close()}catch(e){}
-    show(hadSession?"휴대폰에 다시 연결 중…\\n자동으로 다시 시도합니다":"휴대폰 연결 경로 준비 중…\\n자동으로 다시 시도합니다");
+    show(hadSession?"휴대폰에 다시 연결 중…\n자동으로 다시 시도합니다":"휴대폰 연결 경로 준비 중…\n자동으로 다시 시도합니다");
     clearTimeout(retry);retry=setTimeout(connect,1000);
   };
   // Tesla can leave an old TCP handshake pending while the phone VPN is coming up.
@@ -75,7 +75,7 @@ function connect(){
   socket.onclose=()=>{
     if(generation!==connectGeneration)return;
     clearTimeout(connectWatchdog);clearTimeout(configTimer);config=null;closeDecoder();syncCarGps(false);
-    show(hadSession?"휴대폰에 다시 연결 중…\\n자동으로 다시 시도합니다":"휴대폰 연결 경로 준비 중…\\n자동으로 다시 시도합니다");
+    show(hadSession?"휴대폰에 다시 연결 중…\n자동으로 다시 시도합니다":"휴대폰 연결 경로 준비 중…\n자동으로 다시 시도합니다");
     clearTimeout(retry);retry=setTimeout(connect,1000);
   };
 }

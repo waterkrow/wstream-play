@@ -57,12 +57,12 @@ function connect(){
     show(hadSession?"휴대폰에 다시 연결 중…\n자동으로 다시 시도합니다":"휴대폰 연결 경로 준비 중…\n자동으로 다시 시도합니다");
     clearTimeout(retry);retry=setTimeout(connect,750);
   };
-  connectWatchdog=setTimeout(retrySoon,4000);
+  connectWatchdog=setTimeout(retrySoon,12000);
   socket.onopen=()=>{
     if(generation!==connectGeneration)return;
     clearTimeout(connectWatchdog);hadSession=true;show("휴대폰 연결됨 · 영상 준비 중…");sendCfg();clearTimeout(configTimer);configTimer=setTimeout(()=>{
       if(ws===socket&&socket.readyState===1&&!config)socket.close();
-    },5000)
+    },12000)
   };
   socket.onmessage=e=>{if(generation!==connectGeneration)return;const u=new Uint8Array(e.data);
     if(u[0]===1)configure(JSON.parse(new TextDecoder().decode(u.subarray(1))));

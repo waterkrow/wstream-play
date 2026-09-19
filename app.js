@@ -3,7 +3,7 @@ const STREAM_HOST="wstream.ddnsfree.com:34752";
 const BAR=62; // 48px * 1.3, must match #bar height in index.html
 const canvas=document.getElementById("screen"),ctx=canvas.getContext("2d",{alpha:false,desynchronized:true}),
       statusEl=document.getElementById("status"),pinsEl=document.getElementById("pins"),metaEl=document.getElementById("meta");
-let ws,decoder,config,ready=false,retry,recfg,frames=0,needKey=false,decErrs=0,batt=-1,temp=0,configTimer,hadSession=false;
+let ws,decoder,config,ready=false,retry,recfg,frames=0,needKey=false,decErrs=0,batt=-1,temp=0,configTimer,hadSession=false;\nlet connectWatchdog=0,connectGeneration=0;
 let gpsWatch=null,gpsWanted=false,lastGpsSent=0,lastGpsError="";
 const show=s=>{statusEl.textContent=s;statusEl.classList.remove("hide")};
 const sendJson=o=>{if(ws&&ws.readyState===1)ws.send(JSON.stringify(o))};
@@ -44,16 +44,40 @@ function renderStatus(o){
 }
 
 function connect(){
-  show(hadSession?"휴대폰에 다시 연결 중…\n미러링을 시작하면 자동으로 연결됩니다":"휴대폰 연결 중…");
-  ws=new WebSocket(`wss://${STREAM_HOST}/ws`);ws.binaryType="arraybuffer";
-  ws.onopen=()=>{hadSession=true;show("휴대폰 연결됨 · 영상 준비 중…");sendCfg();clearTimeout(configTimer);configTimer=setTimeout(()=>{
-    if(ws&&ws.readyState===1&&!config)ws.close();
-  },5000)};
-  ws.onmessage=e=>{const u=new Uint8Array(e.data);
+  const generation=++connectGeneration;
+  clearTimeout(retry);clearTimeout(connectWatchdog);clearTimeout(configTimer);
+  config=null;closeDecoder();syncCarGps(false);
+  if(ws&&ws.readyState<2){try{ws.close()}catch(e){}}
+  show(hadSession?"휴대폰에 다시 연결 중…\\n자동으로 다시 시도합니다":"휴대폰 연결 중…\\n연결 경로가 준비될 때까지 자동 재시도합니다");
+  const socket=new WebSocket(`wss://${STREAM_HOST}/ws`);socket.binaryType="arraybuffer";ws=socket;
+  const retrySoon=()=>{
+    if(generation!==connectGeneration)return;
+    clearTimeout(connectWatchdog);clearTimeout(configTimer);
+    if(ws===socket)ws=null;
+    try{socket.close()}catch(e){}
+    show(hadSession?"휴대폰에 다시 연결 중…\\n자동으로 다시 시도합니다":"휴대폰 연결 경로 준비 중…\\n자동으로 다시 시도합니다");
+    clearTimeout(retry);retry=setTimeout(connect,1000);
+  };
+  // Tesla can leave an old TCP handshake pending while the phone VPN is coming up.
+  // Force a fresh attempt eventually so the user never has to refresh the page.
+  connectWatchdog=setTimeout(retrySoon,20000);
+  socket.onopen=()=>{
+    if(generation!==connectGeneration)return;
+    clearTimeout(connectWatchdog);hadSession=true;show("휴대폰 연결됨 · 영상 준비 중…");sendCfg();clearTimeout(configTimer);configTimer=setTimeout(()=>{
+      if(ws===socket&&socket.readyState===1&&!config)retrySoon();
+    },15000)
+  };
+  socket.onmessage=e=>{if(generation!==connectGeneration)return;const u=new Uint8Array(e.data);
     if(u[0]===1)configure(JSON.parse(new TextDecoder().decode(u.subarray(1))));
     else if(u[0]===2)frame(u);
     else if(u[0]===3){try{renderStatus(JSON.parse(new TextDecoder().decode(u.subarray(1))))}catch(x){}}};
-  ws.onclose=()=>{clearTimeout(configTimer);config=null;closeDecoder();syncCarGps(false);show("휴대폰에 다시 연결 중…\n미러링을 시작하면 자동으로 연결됩니다");clearTimeout(retry);retry=setTimeout(connect,500)};
+  socket.onerror=retrySoon;
+  socket.onclose=()=>{
+    if(generation!==connectGeneration)return;
+    clearTimeout(connectWatchdog);clearTimeout(configTimer);config=null;closeDecoder();syncCarGps(false);
+    show(hadSession?"휴대폰에 다시 연결 중…\\n자동으로 다시 시도합니다":"휴대폰 연결 경로 준비 중…\\n자동으로 다시 시도합니다");
+    clearTimeout(retry);retry=setTimeout(connect,1000);
+  };
 }
 function configure(c){
   clearTimeout(configTimer);config=c;syncCarGps(!!c.useCarGps);canvas.width=c.w;canvas.height=c.h;closeDecoder();needKey=true;

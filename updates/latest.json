@@ -1,0 +1,8 @@
+{
+  "versionCode": 83,
+  "versionName": "0.3.0",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.3.0-83/wstream.apk",
+  "size": 13754976,
+  "sha256": "90613fd7790014d6333cd88b38ee9106e7c2692ef7561a0caeb1dfc494554f3d",
+  "notes": "앱에서 새 버전 확인, 다운로드, 검증 및 설치를 지원합니다. 기존 미러링 설정은 유지됩니다."
+}

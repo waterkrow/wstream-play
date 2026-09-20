@@ -18,13 +18,11 @@ jobs:
       - name: Download and verify approved update bundle
         run: |
           python3 - <<'PY'
-          import hashlib, json, os, pathlib, re, urllib.request, zipfile
+          import hashlib, json, os, pathlib, re, zipfile
           config=json.loads(pathlib.Path('.github/update-release.json').read_text())
           target=pathlib.Path(os.environ['RUNNER_TEMP'])/'wstream-release'
           target.mkdir()
-          request=urllib.request.Request(config['artifactUrl'])
-          with urllib.request.urlopen(request, timeout=60) as response:
-              archive=response.read(30*1024*1024+1)
+          archive=pathlib.Path(config['bundlePath']).read_bytes()
           assert len(archive)<=30*1024*1024
           (target/'bundle.zip').write_bytes(archive)
           with zipfile.ZipFile(target/'bundle.zip') as z:

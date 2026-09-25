@@ -80,6 +80,7 @@ function renderStatus(o){
 
 function disconnectViewer(socket, message){
   if(ws!==socket)return;
+  cancelTouches();
   // Detach first: a delayed close from an obsolete socket must not reset a newer viewer.
   ws=null;
   socket.onopen=socket.onmessage=socket.onclose=socket.onerror=null;
@@ -89,6 +90,7 @@ function disconnectViewer(socket, message){
   show(message);clearTimeout(retry);retry=setTimeout(connect,1000);
 }
 function connect(){
+  cancelTouches();
   clearTimeout(retry);
   if(ws){
     const previous=ws;ws=null;
@@ -124,6 +126,7 @@ function connect(){
   socket.onerror=()=>disconnectViewer(socket,"연결에 응답이 없습니다 · 자동으로 다시 연결 중…");
 }
 function configure(c){
+  cancelTouches();
   clearTimeout(configTimer);config=c;syncCarGps(!!c.useCarGps);canvas.width=c.w;canvas.height=c.h;closeDecoder();needKey=true;
   if(!("VideoDecoder" in window)){show("이 브라우저는 WebCodecs VideoDecoder를 지원하지 않습니다");return}
   const csd=Uint8Array.from(atob(c.csd),x=>x.charCodeAt(0)),codec=codecFromCsd(csd);
@@ -171,11 +174,42 @@ function frame(u){frames++;if(!decoder||decoder.state!=="configured")return;cons
   try{decoder.decode(new EncodedVideoChunk({type:key?"key":"delta",timestamp:ts,data}))}catch(e){console.warn(e);needKey=true;sendJson({kf:1})}}
 function closeDecoder(){ready=false;clearTimeout(frameTimer);if(decoder){try{decoder.close()}catch(e){}decoder=null}}
 function toDisp(e){const r=canvas.getBoundingClientRect(),scale=Math.min(r.width/config.w,r.height/config.h),dw=config.w*scale,dh=config.h*scale,ox=r.left+(r.width-dw)/2,oy=r.top+(r.height-dh)/2;return[Math.max(0,Math.min(config.w-1,Math.round((e.clientX-ox)/scale))),Math.max(0,Math.min(config.h-1,Math.round((e.clientY-oy)/scale)))]}
-let dragging=false,lastMove=0;
-canvas.addEventListener("pointerdown",e=>{if(!config||!ws||ws.readyState!==1)return;try{canvas.setPointerCapture(e.pointerId)}catch(x){}dragging=true;const[x,y]=toDisp(e);sendJson({t:[0,x,y]})});
-canvas.addEventListener("pointermove",e=>{if(!dragging)return;const now=performance.now();if(now-lastMove<12)return;lastMove=now;const[x,y]=toDisp(e);sendJson({t:[2,x,y]})});
-canvas.addEventListener("pointerup",e=>{if(!dragging)return;dragging=false;const[x,y]=toDisp(e);sendJson({t:[1,x,y]})});
-canvas.addEventListener("pointercancel",e=>{if(!dragging)return;dragging=false;const[x,y]=toDisp(e);sendJson({t:[1,x,y]})});
+// Keep Android pointer IDs stable for the entire gesture (browser IDs may be >31).
+const touches=new Map();
+let lastMove=0;
+function sendTouch(action,index=0){
+  sendJson({mt:{action,index,points:Array.from(touches.values(),p=>[p.id,p.x,p.y])}});
+}
+function cancelTouches(){
+  if(touches.size)sendTouch(3);
+  touches.clear();lastMove=0;
+}
+canvas.addEventListener("pointerdown",e=>{
+  if(!config||!ready||!ws||ws.readyState!==1||touches.has(e.pointerId)||touches.size>=10)return;
+  if(e.pointerType==="mouse"&&e.button!==0)return;
+  e.preventDefault();
+  let id=0;const used=new Set(Array.from(touches.values(),p=>p.id));while(used.has(id))id++;
+  const[x,y]=toDisp(e);touches.set(e.pointerId,{id,x,y});
+  try{canvas.setPointerCapture(e.pointerId)}catch(x){}
+  sendTouch(touches.size===1?0:5,touches.size-1);
+},{passive:false});
+canvas.addEventListener("pointermove",e=>{
+  const p=touches.get(e.pointerId);if(!p||!config)return;
+  e.preventDefault();[p.x,p.y]=toDisp(e);
+  const now=performance.now();if(now-lastMove<12)return;lastMove=now;sendTouch(2);
+},{passive:false});
+canvas.addEventListener("pointerup",e=>{
+  const p=touches.get(e.pointerId);if(!p||!config)return;
+  e.preventDefault();[p.x,p.y]=toDisp(e);
+  sendTouch(touches.size===1?1:6,Array.from(touches.keys()).indexOf(e.pointerId));
+  touches.delete(e.pointerId);
+},{passive:false});
+canvas.addEventListener("pointercancel",cancelTouches);
+canvas.addEventListener("lostpointercapture",e=>{if(touches.has(e.pointerId))cancelTouches()});
+canvas.addEventListener("contextmenu",e=>e.preventDefault());
+window.addEventListener("blur",cancelTouches);
+window.addEventListener("pagehide",cancelTouches);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState!=="visible")cancelTouches()});
 document.getElementById("retry").onclick=connect;
 window.addEventListener("online",()=>{if(!ws||ws.readyState!==1)connect()});
 connect();

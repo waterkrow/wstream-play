@@ -3,7 +3,8 @@ const STREAM_HOST="wstream.ddnsfree.com:34752";
 const BAR=62; // 48px * 1.3, must match #bar height in index.html
 const canvas=document.getElementById("screen"),ctx=canvas.getContext("2d",{alpha:false,desynchronized:true}),
       statusEl=document.getElementById("status"),pinsEl=document.getElementById("pins"),metaEl=document.getElementById("meta");
-let ws,decoder,config,ready=false,retry,recfg,frames=0,needKey=false,decErrs=0,batt=-1,temp=0,configTimer,hadSession=false;\nlet connectWatchdog=0,connectGeneration=0;
+let ws,decoder,config,ready=false,retry,recfg,frames=0,needKey=false,decErrs=0,batt=-1,temp=0,configTimer,hadSession=false;
+let connectWatchdog=0,connectGeneration=0;
 let gpsWatch=null,gpsWanted=false,lastGpsSent=0,lastGpsError="";
 const show=s=>{statusEl.textContent=s;statusEl.classList.remove("hide")};
 const sendJson=o=>{if(ws&&ws.readyState===1)ws.send(JSON.stringify(o))};
@@ -44,6 +45,7 @@ function renderStatus(o){
 }
 
 function connect(){
+  cancelTouches();
   const generation=++connectGeneration;
   clearTimeout(retry);clearTimeout(connectWatchdog);clearTimeout(configTimer);
   config=null;closeDecoder();syncCarGps(false);
@@ -80,6 +82,7 @@ function connect(){
   };
 }
 function configure(c){
+  cancelTouches();
   clearTimeout(configTimer);config=c;syncCarGps(!!c.useCarGps);canvas.width=c.w;canvas.height=c.h;closeDecoder();needKey=true;
   if(!("VideoDecoder" in window)){show("이 브라우저는 WebCodecs VideoDecoder를 지원하지 않습니다");return}
   const csd=Uint8Array.from(atob(c.csd),x=>x.charCodeAt(0)),codec=codecFromCsd(csd);
@@ -125,11 +128,42 @@ function frame(u){frames++;if(!decoder||decoder.state!=="configured")return;cons
   try{decoder.decode(new EncodedVideoChunk({type:key?"key":"delta",timestamp:ts,data}))}catch(e){console.warn(e);needKey=true;sendJson({kf:1})}}
 function closeDecoder(){ready=false;if(decoder){try{decoder.close()}catch(e){}decoder=null}}
 function toDisp(e){const r=canvas.getBoundingClientRect(),scale=Math.min(r.width/config.w,r.height/config.h),dw=config.w*scale,dh=config.h*scale,ox=r.left+(r.width-dw)/2,oy=r.top+(r.height-dh)/2;return[Math.max(0,Math.min(config.w-1,Math.round((e.clientX-ox)/scale))),Math.max(0,Math.min(config.h-1,Math.round((e.clientY-oy)/scale)))]}
-let dragging=false,lastMove=0;
-canvas.addEventListener("pointerdown",e=>{if(!config||!ws||ws.readyState!==1)return;try{canvas.setPointerCapture(e.pointerId)}catch(x){}dragging=true;const[x,y]=toDisp(e);sendJson({t:[0,x,y]})});
-canvas.addEventListener("pointermove",e=>{if(!dragging)return;const now=performance.now();if(now-lastMove<12)return;lastMove=now;const[x,y]=toDisp(e);sendJson({t:[2,x,y]})});
-canvas.addEventListener("pointerup",e=>{if(!dragging)return;dragging=false;const[x,y]=toDisp(e);sendJson({t:[1,x,y]})});
-canvas.addEventListener("pointercancel",e=>{if(!dragging)return;dragging=false;const[x,y]=toDisp(e);sendJson({t:[1,x,y]})});
+// Keep Android pointer IDs stable for the entire gesture (browser IDs may be >31).
+const touches=new Map();
+let lastMove=0;
+function sendTouch(action,index=0){
+  sendJson({mt:{action,index,points:Array.from(touches.values(),p=>[p.id,p.x,p.y])}});
+}
+function cancelTouches(){
+  if(touches.size)sendTouch(3);
+  touches.clear();lastMove=0;
+}
+canvas.addEventListener("pointerdown",e=>{
+  if(!config||!ready||!ws||ws.readyState!==1||touches.has(e.pointerId)||touches.size>=10)return;
+  if(e.pointerType==="mouse"&&e.button!==0)return;
+  e.preventDefault();
+  let id=0;const used=new Set(Array.from(touches.values(),p=>p.id));while(used.has(id))id++;
+  const[x,y]=toDisp(e);touches.set(e.pointerId,{id,x,y});
+  try{canvas.setPointerCapture(e.pointerId)}catch(x){}
+  sendTouch(touches.size===1?0:5,touches.size-1);
+},{passive:false});
+canvas.addEventListener("pointermove",e=>{
+  const p=touches.get(e.pointerId);if(!p||!config)return;
+  e.preventDefault();[p.x,p.y]=toDisp(e);
+  const now=performance.now();if(now-lastMove<12)return;lastMove=now;sendTouch(2);
+},{passive:false});
+canvas.addEventListener("pointerup",e=>{
+  const p=touches.get(e.pointerId);if(!p||!config)return;
+  e.preventDefault();[p.x,p.y]=toDisp(e);
+  sendTouch(touches.size===1?1:6,Array.from(touches.keys()).indexOf(e.pointerId));
+  touches.delete(e.pointerId);
+},{passive:false});
+canvas.addEventListener("pointercancel",cancelTouches);
+canvas.addEventListener("lostpointercapture",e=>{if(touches.has(e.pointerId))cancelTouches()});
+canvas.addEventListener("contextmenu",e=>e.preventDefault());
+window.addEventListener("blur",cancelTouches);
+window.addEventListener("pagehide",cancelTouches);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState!=="visible")cancelTouches()});
 connect();
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){
   if(!ws||ws.readyState>1)connect();else{sendCfg();sendJson({kf:1})}

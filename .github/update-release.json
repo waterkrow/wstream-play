@@ -1,5 +1,6 @@
 {
   "bundlePath": ".github/releases/wstream-87.zip",
   "versionCode": 87,
-  "sha256": "a6b5b0454c11c37402b229985363733d91d8ab51989ec4fe5fe52da685b12613"
+  "sha256": "a6b5b0454c11c37402b229985363733d91d8ab51989ec4fe5fe52da685b12613",
+  "transferRevision": 2
 }

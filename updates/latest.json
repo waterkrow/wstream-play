@@ -1,8 +1,8 @@
 {
-  "versionCode": 87,
-  "versionName": "0.3.1",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.3.1-87/wstream.apk",
-  "size": 13759236,
-  "sha256": "a6b5b0454c11c37402b229985363733d91d8ab51989ec4fe5fe52da685b12613",
-  "notes": "두 손가락 지도 확대·축소를 위한 멀티터치를 지원하고 메인 화면에 버전과 빌드 번호를 표시합니다."
+  "versionCode": 88,
+  "versionName": "0.3.2",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.3.2-88/wstream.apk",
+  "size": 13762324,
+  "sha256": "5c5fcdd1c25e79233f10867a35d57d105ead7424c8dd46463c4244f1c1d381e4",
+  "notes": "앱의 − / + 버튼으로 하단 태스크바를 70~150% 범위에서 비율을 유지하며 조절합니다. 선택한 크기는 저장되고 연결 중에도 적용됩니다."
 }

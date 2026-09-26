@@ -1,6 +1,6 @@
 "use strict";
 const STREAM_HOST="wstream.ddnsfree.com:34752";
-const BAR=62; // 48px * 1.3, must match #bar height in index.html
+let BAR=62; // Current taskbar height in CSS pixels.
 const canvas=document.getElementById("screen"),ctx=canvas.getContext("2d",{alpha:false,desynchronized:true}),
       statusEl=document.getElementById("status"),pinsEl=document.getElementById("pins"),metaEl=document.getElementById("meta");
 let ws,decoder,config,ready=false,retry,recfg,frames=0,needKey=false,decErrs=0,batt=-1,temp=0,configTimer,hadSession=false;
@@ -32,7 +32,17 @@ function renderMeta(){
 }
 setInterval(renderMeta,10000);renderMeta();
 
+function applyTaskbarSize(value){
+  const percent=Number.isFinite(value)?Math.max(70,Math.min(150,value)):100;
+  const next=62*percent/100;
+  if(Math.abs(BAR-next)<0.01)return;
+  cancelTouches();
+  document.documentElement.style.setProperty("--taskbar-scale",String(percent/100));
+  BAR=next;
+  sendCfg();
+}
 function renderStatus(o){
+  applyTaskbarSize(o.taskbarPercent);
   batt=typeof o.batt==="number"?o.batt:-1;
   temp=typeof o.temp==="number"?o.temp:0;
   renderMeta();

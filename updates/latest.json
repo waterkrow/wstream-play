@@ -1,8 +1,8 @@
 {
-  "versionCode": 93,
-  "versionName": "0.3.6",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.3.6-93/wstream.apk",
-  "size": 13790536,
-  "sha256": "10e6252e728a8a1310bf83ac9de4134fb8590cd2000c3274c173dbbfeea21fbd",
-  "notes": "핫스팟 연결 진단 강화: 차량 패킷이 휴대폰 서버로 가는지 판정(route get), 잘리던 IP 규칙/경로 로그 정리, IP·TCP 카운터 기록. 연결 방식은 그대로입니다."
+  "versionCode": 94,
+  "versionName": "0.3.7",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.3.7-94/wstream.apk",
+  "size": 13790620,
+  "sha256": "4797363b9920f26fa331377be482b4b6ee5cfbbff479afdf6b9c40d465abde8e",
+  "notes": "영상 연결을 끊을 때 즉시 정리(RST)하도록 변경: 끝난 연결이 휴대폰에 몇 시간씩 남아 차량의 새 연결을 막던 문제 수정. 연결을 맺는 방식은 그대로입니다."
 }

@@ -1,8 +1,8 @@
 {
-  "versionCode": 90,
-  "versionName": "0.3.3",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.3.3-90/wstream.apk",
-  "size": 13770800,
-  "sha256": "8b69bb60ce535f80af7282e44e3be26f3f0f9691809f7ff8b65f60798f9b658b",
-  "notes": "연결·GPS 로그를 선택한 화면별로 공유합니다. 브라우저 진단(web-2)은 연결 전 기록을 보관하고 연결 후 앱으로 전송하며, 연결·영상 준비 단계와 첫 화면 표시 시간을 기록합니다."
+  "versionCode": 91,
+  "versionName": "0.3.4",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.3.4-91/wstream.apk",
+  "size": 13781732,
+  "sha256": "ab02aff054dcd05037b75dcd748d358351c74c3ca1bf28fc15c54f3241e62d50",
+  "notes": "연결 대기 중 핫스팟·네트워크 경로·Shizuku 조회 결과와 VPN 내부의 영상 TCP/DNS 질의 요약을 기록합니다. 기존 연결 방식과 재시도 간격, GPS/연결 로그 분리는 유지합니다."
 }

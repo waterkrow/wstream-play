@@ -1,8 +1,8 @@
 {
-  "versionCode": 92,
-  "versionName": "0.3.5",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.3.5-92/wstream.apk",
-  "size": 13787164,
-  "sha256": "03a5f8605ea0aeec976773e531d92967dd1d9fa1220780a6530558204339df3b",
-  "notes": "Shizuku 네트워크 진단을 전용 UserService 방식으로 변경했습니다. 조회 단계·상세 오류를 기록하고 브라우저 연결 직후 경로와 소켓 상태를 수집합니다. 기존 연결 방식과 재시도 간격은 유지합니다."
+  "versionCode": 93,
+  "versionName": "0.3.6",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.3.6-93/wstream.apk",
+  "size": 13790536,
+  "sha256": "10e6252e728a8a1310bf83ac9de4134fb8590cd2000c3274c173dbbfeea21fbd",
+  "notes": "핫스팟 연결 진단 강화: 차량 패킷이 휴대폰 서버로 가는지 판정(route get), 잘리던 IP 규칙/경로 로그 정리, IP·TCP 카운터 기록. 연결 방식은 그대로입니다."
 }

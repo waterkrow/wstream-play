@@ -32,7 +32,7 @@ canvas{flex:1 1 auto;min-height:0;width:100%;object-fit:contain;touch-action:non
     <div id="meta"></div>
   </div>
 </div>
-<div id="status" class="status"><main class="wait-card"><div class="logo">W</div><h1>wStream</h1><p>휴대폰 핫스팟에 연결하고<br>wStream을 시작해 주세요.</p><div id="status-message">휴대폰 연결 대기 중…</div><button id="retry" type="button">지금 다시 연결</button><small>연결되면 이 화면에서 미러링을 시작합니다 · web-2</small></main></div>
+<div id="status" class="status"><main class="wait-card"><div class="logo">W</div><h1>wStream</h1><p>휴대폰 핫스팟에 연결하고<br>wStream을 시작해 주세요.</p><div id="status-message">휴대폰 연결 대기 중…</div><button id="retry" type="button">지금 다시 연결</button><small>연결되면 이 화면에서 미러링을 시작합니다 · web-3</small></main></div>
 <script>window.addEventListener("error",function(e){document.getElementById("status").classList.remove("hide");document.getElementById("status-message").textContent="화면 실행 오류 · "+(e.message||"스크립트 실행 실패");});</script>
 <script>"use strict";
 let BAR=62; // Current taskbar height in CSS pixels.
@@ -44,14 +44,14 @@ const show=s=>{document.getElementById("status-message").textContent=s;statusEl.
 const sendJson=o=>{if(ws&&ws.readyState===1)ws.send(JSON.stringify(o))};
 
 // Bounded, local-only history. Unacknowledged events survive failed connections/reloads.
-const WEB_VERSION="web-2",wdKey="wstream-diag-v2",wdPage=Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const WEB_VERSION="web-3",wdKey="wstream-diag-v2",wdPage=Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 let wdSeq=0,wdHistory=[],wdPending=[],wdTimer,wdInFlight=false,wdAttemptStart=performance.now(),wdFirstPacket=false;
 try{const saved=JSON.parse(localStorage.getItem(wdKey)||"{}");if(Array.isArray(saved.history))wdHistory=saved.history.slice(-200);if(Array.isArray(saved.pending))wdPending=saved.pending.slice(-200)}catch(e){}
 function wdSave(){try{localStorage.setItem(wdKey,JSON.stringify({history:wdHistory,pending:wdPending}))}catch(e){}}
 function wdLog(event,detail=""){
   try{
     const row={id:wdPage+":"+(++wdSeq),v:WEB_VERSION,time:Date.now(),attempt:connectAttempt,ms:Math.round(performance.now()-wdAttemptStart),event,detail:String(detail).replace(/[\r\n\t]/g," ").slice(0,180)};
-    wdHistory.push(row);wdHistory=wdHistory.slice(-200);wdPending.push(row);wdPending=wdPending.slice(-200);wdSave();wdRender();
+    wdHistory.push(row);wdHistory=wdHistory.slice(-200);wdPending.push(row);wdPending=wdPending.slice(-200);wdSave();
     clearTimeout(wdTimer);wdTimer=setTimeout(wdFlush,0);
   }catch(e){} // Diagnostics must never interrupt the viewer.
 }
@@ -61,23 +61,11 @@ function wdFlush(){
 }
 function wdAck(ids){
   if(!Array.isArray(ids))return;
-  wdPending=wdPending.filter(r=>!ids.includes(r.id));wdInFlight=false;wdSave();wdRender();
+  wdPending=wdPending.filter(r=>!ids.includes(r.id));wdInFlight=false;wdSave();
   clearTimeout(wdTimer);wdTimer=setTimeout(wdFlush,0);
 }
 function wdText(){return "wStream "+WEB_VERSION+" · 브라우저 연결 진단 (시각은 차량 브라우저 기준)\n"+wdHistory.map(r=>new Date(r.time).toISOString()+" ["+r.id+"] 시도="+r.attempt+" +"+r.ms+"ms "+r.event+" "+r.detail).join("\n")}
-let wdPanel,wdOutput,wdButton;
-function wdRender(){if(wdOutput)wdOutput.textContent=wdText();if(wdButton)wdButton.textContent="연결 진단 · "+WEB_VERSION+(wdPending.length?" · 미전송 "+wdPending.length:"")}
-function wdSetup(){
-  wdButton=document.createElement("button");wdButton.type="button";wdButton.style.cssText="position:fixed;right:8px;top:8px;z-index:8;font-size:12px;padding:6px 10px;border:1px solid #52606d;border-radius:8px;color:#eee;background:#17212be6";
-  wdPanel=document.createElement("div");wdPanel.style.cssText="display:none;position:fixed;inset:50px 12px 76px;z-index:9;background:#101820;color:#eee;padding:12px;overflow:auto;text-align:left";
-  const note=document.createElement("p");note.textContent="연결 전 기록은 브라우저에 보관됩니다. 연결 후 앱의 연결 로그로 전송됩니다. DNS·TLS 실패의 세부 원인은 브라우저에서 제공하지 않을 수 있습니다.";note.style.fontSize="14px";
-  const save=document.createElement("button");save.textContent="기록 저장";save.onclick=()=>{const u=URL.createObjectURL(new Blob([wdText()],{type:"text/plain;charset=utf-8"}));const a=document.createElement("a");a.href=u;a.download="wstream-browser-log.txt";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
-  const close=document.createElement("button");close.textContent="닫기";close.onclick=()=>wdPanel.style.display="none";
-  wdOutput=document.createElement("pre");wdOutput.style.cssText="white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px";
-  wdPanel.append(note,save,close,wdOutput);document.body.append(wdButton,wdPanel);
-  wdButton.onclick=()=>{wdPanel.style.display=wdPanel.style.display==="none"?"block":"none";wdRender()};wdRender();
-}
-try{wdSetup()}catch(e){}
+
 window.addEventListener("online",()=>wdLog("online"));
 window.addEventListener("offline",()=>wdLog("offline"));
 document.addEventListener("visibilitychange",()=>wdLog("visibility",document.visibilityState));

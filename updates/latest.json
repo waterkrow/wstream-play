@@ -1,8 +1,8 @@
 {
-  "versionCode": 94,
-  "versionName": "0.3.7",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.3.7-94/wstream.apk",
-  "size": 13790620,
-  "sha256": "4797363b9920f26fa331377be482b4b6ee5cfbbff479afdf6b9c40d465abde8e",
-  "notes": "영상 연결을 끊을 때 즉시 정리(RST)하도록 변경: 끝난 연결이 휴대폰에 몇 시간씩 남아 차량의 새 연결을 막던 문제 수정. 연결을 맺는 방식은 그대로입니다."
+  "versionCode": 95,
+  "versionName": "0.3.8",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.3.8-95/wstream.apk",
+  "size": 13789840,
+  "sha256": "9f5b308bad4d49931801fade66813abe5a40155edf967eee82964dacc9ad3343",
+  "notes": "미러링 화면 우측 상단의 연결 진단 버튼과 패널을 제거했습니다. 연결 기록은 앱의 연결 로그에서 확인할 수 있습니다."
 }

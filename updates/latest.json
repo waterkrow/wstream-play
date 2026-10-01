@@ -1,8 +1,8 @@
 {
-  "versionCode": 95,
-  "versionName": "0.3.8",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.3.8-95/wstream.apk",
-  "size": 13789840,
-  "sha256": "9f5b308bad4d49931801fade66813abe5a40155edf967eee82964dacc9ad3343",
-  "notes": "미러링 화면 우측 상단의 연결 진단 버튼과 패널을 제거했습니다. 연결 기록은 앱의 연결 로그에서 확인할 수 있습니다."
+  "versionCode": 96,
+  "versionName": "0.3.9",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.3.9-96/wstream.apk",
+  "size": 13796232,
+  "sha256": "5dc3a9009974bb58cc279f8288e4d4bb019d31221b52c085f26d194ddcc7e354",
+  "notes": "비정상 연결 종료 시 연결 상태 정리를 보강했습니다. 영상 전송을 클라이언트별로 분리하고 전송 지연·대기열 초과 시 자동 재연결하도록 개선했습니다."
 }

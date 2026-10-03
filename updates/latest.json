@@ -1,8 +1,8 @@
 {
-  "versionCode": 96,
-  "versionName": "0.3.9",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.3.9-96/wstream.apk",
-  "size": 13796232,
-  "sha256": "5dc3a9009974bb58cc279f8288e4d4bb019d31221b52c085f26d194ddcc7e354",
-  "notes": "비정상 연결 종료 시 연결 상태 정리를 보강했습니다. 영상 전송을 클라이언트별로 분리하고 전송 지연·대기열 초과 시 자동 재연결하도록 개선했습니다."
+  "versionCode": 108,
+  "versionName": "0.4.0",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.4.0-108/wstream.apk",
+  "size": 66379642,
+  "sha256": "ed00f00fa00c01f231ee5192abb6e03ac94c551cc61cfd171c4b2cd870abba75",
+  "notes": "Shizuku 없이 내장 권한 서비스로 연결합니다. 화면 공유를 이용한 자동 페어링과 단계별 안내를 추가했습니다. 업데이트 후 권한 설정에서 자동 페어링을 최초 한 번 진행해 주세요. 기존 설정과 영상·터치 연결 방식은 유지됩니다."
 }

@@ -47,3 +47,11 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           gh release create "$RELEASE_TAG" "$RELEASE_DIR/wstream.apk" "$RELEASE_DIR/latest.json" --title "wStream $RELEASE_TAG" --notes-file "$RELEASE_DIR/notes.md" --target main
+
+      - name: Verify published APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release download "$RELEASE_TAG" --pattern wstream.apk --dir "$RUNNER_TEMP/published-check"
+          cmp "$RELEASE_DIR/wstream.apk" "$RUNNER_TEMP/published-check/wstream.apk"

@@ -1,8 +1,8 @@
 {
-  "versionCode": 108,
-  "versionName": "0.4.0",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.4.0-108/wstream.apk",
-  "size": 66379642,
-  "sha256": "ed00f00fa00c01f231ee5192abb6e03ac94c551cc61cfd171c4b2cd870abba75",
-  "notes": "Shizuku 없이 내장 권한 서비스로 연결합니다. 화면 공유를 이용한 자동 페어링과 단계별 안내를 추가했습니다. 업데이트 후 권한 설정에서 자동 페어링을 최초 한 번 진행해 주세요. 기존 설정과 영상·터치 연결 방식은 유지됩니다."
+  "versionCode": 109,
+  "versionName": "0.4.1",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.4.1-109/wstream.apk",
+  "size": 66396094,
+  "sha256": "39729f704911029b8b5806f58baef0fbc4e3ce1cb52c2a619e450b763a128604",
+  "notes": "권한 설정을 Shizuku처럼 알림에서 6자리 코드만 입력하는 방식으로 개선했습니다. 주소와 포트는 자동 검색하며 화면 공유 없이 페어링할 수 있습니다. 알림을 누르면 코드 입력 창도 열립니다. 기존 화면 공유 자동 인식은 선택 기능으로 유지됩니다."
 }

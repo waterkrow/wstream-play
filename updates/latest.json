@@ -1,8 +1,8 @@
 {
-  "versionCode": 110,
-  "versionName": "0.4.2",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.4.2-110/wstream.apk",
-  "size": 66396098,
-  "sha256": "219c5569a081ee03368a63dd9432f9856e1a4db333239428601a0b636f48347f",
-  "notes": "정식 버전 병합 과정에서 빠진 앱 업데이트 버튼을 제어 탭 아래에 복구했습니다."
+  "versionCode": 111,
+  "versionName": "0.4.3",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.4.3-111/wstream.apk",
+  "size": 13796240,
+  "sha256": "6943bda5128b52ae0c7b9877f0b2eb3fa3863914b04ce6f1f2aec3a00f11c235",
+  "notes": "내장 ADB 통합 시도를 철회하고 통합 직전의 Shizuku 방식으로 복구했습니다. Shizuku를 실행하고 wStream 권한을 허용해 주세요. 기존 연결 안정화와 앱 업데이트 기능은 유지됩니다."
 }

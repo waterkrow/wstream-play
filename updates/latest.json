@@ -1,8 +1,8 @@
 {
-  "versionCode": 117,
-  "versionName": "0.6.0",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.0-117/wstream.apk",
-  "size": 13839353,
-  "sha256": "fc61241a362cdf360de07bc5c9dcb22d553c512023ed419dd1c91232cd05ca3b",
-  "notes": "태스크바 바로가기를 0.7초 길게 누르면 삭제할 수 있습니다. 티맵 실행 시 오늘은 그만보기와 안전운행을 자동으로 누르는 선택 기능을 추가했습니다. 가상 화면에서 다른 앱을 볼 때 작은 티맵 안내창을 차량에 표시하고, 드래그로 이동하거나 터치해 티맵으로 복귀할 수 있습니다. 폰에는 시작 10초 후 검은 시계를 표시하고 터치로 해제한 뒤 입력이 30초 없으면 다시 표시하는 선택 기능을 추가했습니다. 티맵 기능은 접근성 권한, 폰 시계는 루트 및 표시 권한이 필요합니다. Root/VPN 선택 기능도 유지됩니다."
+  "versionCode": 118,
+  "versionName": "0.6.1",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.1-118/wstream.apk",
+  "size": 13839589,
+  "sha256": "081b26af0432d9c3b6eac470d443d2214abbaa1194638a8005b38c3419b02e18",
+  "notes": "태스크바 아이콘을 길게 누르면 브라우저의 이미지 메뉴가 나오는 문제를 수정했습니다. 아이콘을 버튼으로 표시하고 기본 터치 메뉴를 차단해 0.7초 길게 누르면 바로가기를 삭제합니다. 짧게 누르면 기존처럼 앱을 실행합니다. 0.6.0의 티맵 자동 안전운행, 차량 작은 안내창, 폰 시계 기능은 유지됩니다. 업데이트 후 차량 브라우저의 미러링 페이지를 새로고침해 주세요."
 }

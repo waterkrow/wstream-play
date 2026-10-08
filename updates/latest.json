@@ -1,8 +1,8 @@
 {
-  "versionCode": 124,
-  "versionName": "0.6.6",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.6-124/wstream.apk",
-  "size": 13867577,
-  "sha256": "507fc4433d0f3becd7acfe0c9e81edf98493cb2040a9f1092eb18cbd501d7d0c",
-  "notes": "루트로 실행된 Shizuku에서 Samsung GPS가 위치 주입 명령을 무시하던 문제를 수정했습니다. GPS 전용 프로세스는 shell 권한으로 실행하며, 시스템 GPS 조회의 권한 오류도 해결했습니다. 브라우저가 속도를 보내지 않으면 진단 로그에 속도 없음으로 표시합니다."
+  "versionCode": 126,
+  "versionName": "0.6.7",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.7-126/wstream.apk",
+  "size": 13870005,
+  "sha256": "8c8de6430ce8318a4aea013bb56e75fa2046d27e61b07af3ce307ef8519201a6",
+  "notes": "설정을 화면·네트워크·편의기능의 접이식 메뉴로 정리했습니다. 미러링 시작·중지 버튼은 하단에 고정해 설정이나 진단 로그를 스크롤해도 바로 누를 수 있습니다."
 }

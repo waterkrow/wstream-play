@@ -1,8 +1,8 @@
 {
-  "versionCode": 123,
-  "versionName": "0.6.5",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.5-123/wstream.apk",
-  "size": 13866497,
-  "sha256": "8338b095688232bcb80a67b29f4e625119720d806dbd802eaae7f942f9a46e57",
-  "notes": "차량 GPS 진단을 보강했습니다. 주입 명령 호출 성공과 실제 시스템 GPS 갱신 확인을 구분하며, 차량 데이터와 시스템 GPS의 시각·속도·좌표 차이, 위성 수와 위치 공급자 상태를 기록합니다. 티맵의 실제 위치 사용 여부와는 구분해 표시합니다."
+  "versionCode": 124,
+  "versionName": "0.6.6",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.6-124/wstream.apk",
+  "size": 13867577,
+  "sha256": "507fc4433d0f3becd7acfe0c9e81edf98493cb2040a9f1092eb18cbd501d7d0c",
+  "notes": "루트로 실행된 Shizuku에서 Samsung GPS가 위치 주입 명령을 무시하던 문제를 수정했습니다. GPS 전용 프로세스는 shell 권한으로 실행하며, 시스템 GPS 조회의 권한 오류도 해결했습니다. 브라우저가 속도를 보내지 않으면 진단 로그에 속도 없음으로 표시합니다."
 }

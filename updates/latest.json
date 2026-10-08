@@ -1,8 +1,8 @@
 {
-  "versionCode": 121,
-  "versionName": "0.6.3",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.3-121/wstream.apk",
-  "size": 13844773,
-  "sha256": "5c8284d8ed9a7c912624badbb65e4c04702119e6093dbdff3d0d64382ee58b4f",
-  "notes": "전원 연결 자동 시작의 포트 충돌 복구를 보강했습니다. 기존 서버를 먼저 정리하고, 충돌 시 1·2·4초 후 자동 재시도합니다. 중복 자동 시작을 방지하고 포트 점유 진단을 기록합니다."
+  "versionCode": 122,
+  "versionName": "0.6.4",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.4-122/wstream.apk",
+  "size": 13861837,
+  "sha256": "4aff18d801d437d679dd5f7b4cf52d626473569f35c23576d0b95176713c3f9a",
+  "notes": "진단 로그 화면에 로그 보내기와 GitHub 설정을 추가했습니다. 휴대폰에 토큰을 한 번 설정하면 좌표·IP·인증 정보를 가린 최근 접속·GPS 로그를 비공개 GitHub 이슈로 보내고 이슈 번호를 표시합니다."
 }

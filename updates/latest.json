@@ -1,8 +1,8 @@
 {
-  "versionCode": 126,
-  "versionName": "0.6.7",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.7-126/wstream.apk",
-  "size": 13870005,
-  "sha256": "8c8de6430ce8318a4aea013bb56e75fa2046d27e61b07af3ce307ef8519201a6",
-  "notes": "설정을 화면·네트워크·편의기능의 접이식 메뉴로 정리했습니다. 미러링 시작·중지 버튼은 하단에 고정해 설정이나 진단 로그를 스크롤해도 바로 누를 수 있습니다."
+  "versionCode": 127,
+  "versionName": "0.6.8",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.8-127/wstream.apk",
+  "size": 13872729,
+  "sha256": "3281dd343de2d6a262f6fb01bed0543b8fa5bacb9e3a07f9420bea79cc2bfccd",
+  "notes": "차량 GPS 권한 서비스 연결이 3회 연속 실패하면 GPS 서비스만 해제·종료 후 다시 시작합니다. 재시도 대기 시각이 계속 연장되던 문제를 수정하고, 자동 복구 과정과 주입 재개 결과를 진단 로그에 기록합니다."
 }

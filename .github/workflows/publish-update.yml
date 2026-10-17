@@ -37,6 +37,8 @@ else:
           assert hashlib.sha256(apk).hexdigest()==config['sha256']==manifest['sha256']
           assert len(apk)==manifest['size']
           assert manifest['versionCode']==config['versionCode']
+          if 'notes' in config:
+              manifest['notes']=config['notes']
           tag=f"v{manifest['versionName']}-{manifest['versionCode']}"
           assert re.fullmatch(r'[A-Za-z0-9._-]+',tag)
           assert manifest['downloadUrl']==f'https://github.com/waterkrow/wstream-play/releases/download/{tag}/wstream.apk'

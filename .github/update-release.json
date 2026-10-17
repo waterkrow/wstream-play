@@ -1,6 +1,6 @@
 {
-  "bundleUrl": "https://sdmntprkoreacentral.oaiusercontent.com/files/00000000-c220-8206-826f-030acd10e6d1/raw?se=2026-10-17T14%3A46%3A40Z&sp=r&sv=2026-02-06&sr=b&scid=336c8bcc-de16-460d-ad5f-195905976e3c&skoid=3e273c3d-5ea1-4088-9e18-79685531b184&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-16T20%3A35%3A37Z&ske=2026-10-17T20%3A35%3A37Z&sks=b&skv=2026-02-06&sig=v7puqXt1Yz1FFMVFLTGkZC1cJ%2BfL9AdmYe42QgWRC80%3D",
-  "versionCode": 130,
-  "sha256": "a5c5094088776a5c80d5eccba694134208e081e249cf9229e2c0464b84ef29b7",
-  "notes": "미러링 시작 때 비공개 저장소의 새 인증서 캐시를 확인·검증해 자동 적용합니다. Proxmox Certbot 갱신 파일 게시 설정이 필요합니다. 차량 GPS 권한 서비스의 연속 연결 실패 자동 복구도 포함합니다."
+  "bundleUrl": "https://sdmntprkoreacentral.oaiusercontent.com/files/00000000-8c18-8206-ae41-4b8b5fbc971f/raw?se=2026-10-17T15%3A24%3A26Z&sp=r&sv=2026-02-06&sr=b&scid=b5b6bd48-e5da-4e15-91a6-5d1da7a662eb&skoid=3e273c3d-5ea1-4088-9e18-79685531b184&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-16T20%3A48%3A05Z&ske=2026-10-17T20%3A48%3A05Z&sks=b&skv=2026-02-06&sig=lhnmmukOZgvjF9qqNSvBMBJZDC4P2AbR4FeKCymlbsM%3D",
+  "versionCode": 134,
+  "sha256": "5231144298fd6f913cfc2a57eac667b2bd7da18702a5f14059e4bae4f0d69a4d",
+  "notes": "유효한 저장 인증서로 미러링을 바로 시작한 뒤 새 인증서 캐시를 백그라운드에서 확인합니다. 네트워크 설정에서 현재 인증서 만료일을 확인할 수 있습니다. 차량 GPS 권한 서비스 자동 복구도 포함합니다."
 }

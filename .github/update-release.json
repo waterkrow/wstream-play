@@ -1,5 +1,6 @@
 {
-  "bundlePath": ".github/releases/wstream-127.zip",
-  "versionCode": 127,
-  "sha256": "3281dd343de2d6a262f6fb01bed0543b8fa5bacb9e3a07f9420bea79cc2bfccd"
+  "bundleUrl": "https://sdmntprkoreacentral.oaiusercontent.com/files/00000000-3c9c-8206-87ac-e654991a4109/raw?se=2026-10-17T14%3A45%3A56Z&sp=r&sv=2026-02-06&sr=b&scid=336c8bcc-de16-460d-ad5f-195905976e3c&skoid=3e273c3d-5ea1-4088-9e18-79685531b184&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-16T20%3A37%3A47Z&ske=2026-10-17T20%3A37%3A47Z&sks=b&skv=2026-02-06&sig=o9vEAx9DnWl8EnkGtdMFIo0aB0uQUsOsaFeyLup57zo%3D",
+  "versionCode": 130,
+  "sha256": "a5c5094088776a5c80d5eccba694134208e081e249cf9229e2c0464b84ef29b7",
+  "notes": "미러링 시작 때 비공개 저장소의 새 인증서 캐시를 확인·검증해 자동 적용합니다. Proxmox Certbot 갱신 파일 게시 설정이 필요합니다. 차량 GPS 권한 서비스의 연속 연결 실패 자동 복구도 포함합니다."
 }

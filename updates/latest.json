@@ -1,8 +1,8 @@
 {
-  "versionCode": 130,
-  "versionName": "0.6.9",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.9-130/wstream.apk",
-  "size": 13876885,
-  "sha256": "a5c5094088776a5c80d5eccba694134208e081e249cf9229e2c0464b84ef29b7",
-  "notes": "미러링 시작 때 비공개 저장소의 새 인증서 캐시를 확인·검증해 자동 적용합니다. Proxmox Certbot 갱신 파일 게시 설정이 필요합니다. 차량 GPS 권한 서비스의 연속 연결 실패 자동 복구도 포함합니다."
+  "versionCode": 134,
+  "versionName": "0.6.10",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.10-134/wstream.apk",
+  "size": 13880929,
+  "sha256": "5231144298fd6f913cfc2a57eac667b2bd7da18702a5f14059e4bae4f0d69a4d",
+  "notes": "유효한 저장 인증서로 미러링을 바로 시작한 뒤 새 인증서 캐시를 백그라운드에서 확인합니다. 네트워크 설정에서 현재 인증서 만료일을 확인할 수 있습니다. 차량 GPS 권한 서비스 자동 복구도 포함합니다."
 }

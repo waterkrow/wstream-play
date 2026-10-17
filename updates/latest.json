@@ -1,8 +1,8 @@
 {
-  "versionCode": 127,
-  "versionName": "0.6.8",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.8-127/wstream.apk",
-  "size": 13872729,
-  "sha256": "3281dd343de2d6a262f6fb01bed0543b8fa5bacb9e3a07f9420bea79cc2bfccd",
-  "notes": "차량 GPS 권한 서비스 연결이 3회 연속 실패하면 GPS 서비스만 해제·종료 후 다시 시작합니다. 재시도 대기 시각이 계속 연장되던 문제를 수정하고, 자동 복구 과정과 주입 재개 결과를 진단 로그에 기록합니다."
+  "versionCode": 130,
+  "versionName": "0.6.9",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.9-130/wstream.apk",
+  "size": 13876885,
+  "sha256": "a5c5094088776a5c80d5eccba694134208e081e249cf9229e2c0464b84ef29b7",
+  "notes": "미러링 시작 때 비공개 저장소의 새 인증서 캐시를 확인·검증해 자동 적용합니다. Proxmox Certbot 갱신 파일 게시 설정이 필요합니다. 차량 GPS 권한 서비스의 연속 연결 실패 자동 복구도 포함합니다."
 }

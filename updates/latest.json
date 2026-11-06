@@ -1,8 +1,8 @@
 {
-  "versionCode": 134,
-  "versionName": "0.6.10",
-  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.10-134/wstream.apk",
-  "size": 13880929,
-  "sha256": "5231144298fd6f913cfc2a57eac667b2bd7da18702a5f14059e4bae4f0d69a4d",
-  "notes": "유효한 저장 인증서로 미러링을 바로 시작한 뒤 새 인증서 캐시를 백그라운드에서 확인합니다. 네트워크 설정에서 현재 인증서 만료일을 확인할 수 있습니다. 차량 GPS 권한 서비스 자동 복구도 포함합니다."
+  "versionCode": 172,
+  "versionName": "0.6.11",
+  "downloadUrl": "https://github.com/waterkrow/wstream-play/releases/download/v0.6.11-172/wstream.apk",
+  "size": 13885765,
+  "sha256": "f76d12c570709765e100c5644ff79d635724b6a24ee5bd46baf5ae9ed89d2f36",
+  "notes": "wStream 0.6.11: 간결한 3탭 화면과 설정 바로가기를 추가하고, 업데이트 화면을 열면 자동으로 새 버전을 확인합니다."
 }
